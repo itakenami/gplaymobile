@@ -1,0 +1,43 @@
+#{extends 'main.jqm.html' /}
+
+<div data-role="header" data-theme="${jqmtema}">
+
+    <a href="@{Cargos.index}" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
+    <h1>Cargo</h1>
+    <a href="#" onclick="$('#form').submit()" data-icon="plus" data-role="button" data-direction="reverse" data-transition="slide">Salvar</a>
+</div>
+
+<div data-role="content">
+    
+    <div class="content-primary">
+
+        <form id="form" action="@{Cargos.save(cargo?.id)}" method="POST"> 
+
+            <ul data-role="listview" data-inset="true" data-divider-theme="${jqmtema}">
+                <li data-role="list-divider">Informações de Cargo</li>
+                <li>#{field 'cargoVO.nome'}<input type="text" name="${field.name}" placeholder="Nome" value="${cargo?.nome}"  />#{/field }</li>
+            </ul>            
+
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a"><a href="@{Cargos.index}" data-theme="a" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a></div>
+                <div class="ui-block-b"><button type="submit" data-theme="${jqmtema}">Salvar</button></div>
+            </fieldset>
+
+        </form>
+
+    </div>
+
+</div>
+
+#{ifErrors}
+<div id="msginfo" class="ui-bar-e" data-role="footer" data-position="fixed">
+    <h3 style="float:left; margin-top:8px;">Verifique os erros</h3>
+    <div style="float:right; margin-top:4px;"><a href="#" onclick="document.getElementById('msginfo').style.display='none'" data-role="button" data-icon="delete" data-iconpos="notext">Button</a></div>
+    <p style="clear:both; font-weight: normal; font-size:85%; margin-bottom:8px;margin-left: 12px">
+        #{error 'cargo.nome'/}
+    </p>
+</div>
+#{/ifErrors}
+
+
+

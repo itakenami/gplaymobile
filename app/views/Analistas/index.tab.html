@@ -1,0 +1,44 @@
+#{extends 'main.jqm.html' /}
+
+
+<script>
+    $(document).ready(function(){
+        resize();
+    });
+    
+    $(window).resize(function() {
+        resize();
+    });
+    
+    function resize(){
+        $('#side').height($(window).height());
+        $('#side').width(300);
+        $('#main').height($(window).height());
+        $('#main').width($(window).width()-301);
+    } 
+    
+    $("#main").load(function (){
+        $.mobile.hidePageLoadingMsg();
+    });
+</script>
+
+<div id="side" style="float:left;overflow: auto;border-right: 1px solid black">
+
+    <div data-role="header" data-theme="${jqmtema}">
+        <a href="@{Application.index}" data-icon="home" data-role="button" data-transition="fade">Menu</a>
+        <h1>Analistas</h1>
+        <a href="@{Analistas.form}" onclick="$.mobile.showPageLoadingMsg();" data-icon="plus" data-role="button" rel="external">Novo</a>
+    </div>
+
+    <div data-role="content">
+        <div class="content-primary">	
+            <ul data-role="listview" data-filter="true">
+                #{list items:analistas, as:'a'}
+                <li><a href="@{Analistas.view(a.id)}" onclick="$.mobile.showPageLoadingMsg();" rel="external" target="main">${a.nome}</a></li>
+                #{/list}
+            </ul>
+        </div>
+    </div>
+
+</div>
+<iframe name="main" id="main" style="float:right" scrolling="auto" frameborder="0" frameborder="1" framespacing="0"></iframe>

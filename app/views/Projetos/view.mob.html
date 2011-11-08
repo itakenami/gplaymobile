@@ -1,0 +1,50 @@
+#{extends 'main.jqm.html' /}
+
+<div data-role="header" data-theme="${jqmtema}">
+
+    <a href="@{Projetos.index}" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
+    <h1>Projeto</h1>
+    <a href="@{Projetos.form(projeto.id)}"  data-transition="flip" data-theme="${jqmtema}" data-role="button" data-icon="search">Editar</a>
+</div>  
+
+<div data-role="content">
+    <div class="content-primary">
+        <div style="text-align: center" data-role="controlgroup" data-type="horizontal">
+            <a id="btn-d1" href="#" #{tab_click tabs:'d1,d2', btns:'btn-d1,btn-d2', show:'d1'/} data-role="button" class="ui-btn-active">Projeto</a>
+            <a id="btn-d2" href="#" #{tab_click tabs:'d1,d2', btns:'btn-d1,btn-d2', show:'d2'/} data-role="button">Analista</a>
+        </div>
+
+        <div id="d1">
+            <ul data-role="listview" data-inset="true" data-divider-theme="${jqmtema}">
+
+                <li data-role="list-divider">Informações de Projeto</li>
+                <li>Nome: <span style="font-weight:normal">${projeto.nome}</span></li>
+                <li>Descricao: <span style="font-weight:normal">${projeto.descricao}</span></li>
+                <li>Data Inicio: <span style="font-weight:normal">${projeto?.data_inicio?.format('dd/MM/yyyy')}</span></li>
+                <li>Data Fim: <span style="font-weight:normal">${projeto?.data_fim?.format('dd/MM/yyyy')}</span></li>
+
+            </ul>
+        </div>
+        <div id="d2">
+            <ul data-role="listview" data-inset="true" data-divider-theme="${jqmtema}">
+                <li data-role="list-divider">Analistas do Projeto</li>
+
+                #{list projeto.analistas, as:'a'}
+                <li><span style="font-weight:normal">${a.toString()}</span></li>
+                #{/list}
+
+            </ul>
+        </div>
+        <fieldset>
+            <a href="@{Application.excluir()}?&url=@{Projetos.delete(projeto.id)}" data-rel="dialog" data-transition="slidedown" data-theme="${jqmtema}" data-role="button">Delete</a>
+        </fieldset>
+    </div><!--/content-primary -->	
+</div>
+
+<script>
+    $('#d2').hide();
+</script>
+
+
+
+

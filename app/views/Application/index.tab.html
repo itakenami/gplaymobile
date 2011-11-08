@@ -1,0 +1,28 @@
+#{extends 'main.jqm.html' /}
+
+<div data-role="header" data-theme="${jqmtema}">
+
+    <h1>Menu Principal</h1>
+
+</div>
+
+<div data-role="content">
+    <div class="content-primary">	
+        <ul data-role="listview" data-inset="true" data-divider-theme="${jqmtema}"> 
+            <li data-role="list-divider">Cadastros</li>
+            <li><a href="@{Cargos.index()}">Cargos</a></li>
+            <li><a href="@{Analistas.index()}">Analitas</a></li>
+            <li><a href="@{Projetos.index()}">Projetos</a></li>
+            <li data-role="list-divider">Visualização</li>
+            <li><a href="@{DefaultController.setView(1)}" data-transition="fade">Visualizar Mobile</a></li>
+            <li><a href="@{DefaultController.setView(2)}" data-transition="fade">Visualizar Tablet</a></li>
+            <li data-role="list-divider">Temas</li>
+            <li><a href="@{DefaultController.changeJqmTema('a')}" data-transition="fade">Tema A</a></li>
+            <li><a href="@{DefaultController.changeJqmTema('b')}" data-transition="fade">Tema B (Padrão)</a></li>
+            <li><a href="@{DefaultController.changeJqmTema('c')}" data-transition="fade">Tema C</a></li>
+            <li><a href="@{DefaultController.changeJqmTema('d')}" data-transition="fade">Tema D</a></li>
+            <li><a href="@{DefaultController.changeJqmTema('e')}" data-transition="fade">Tema E</a></li>
+           
+        </ul>
+    </div>
+</div>

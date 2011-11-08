@@ -1,0 +1,74 @@
+#{extends 'main.jqm.html' /}
+
+
+<div data-role="header" data-theme="${jqmtema}">
+
+    <a href="@{Projetos.index}" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
+    <h1>Projeto</h1>
+    <a href="#" onclick="$('#form').submit()" data-icon="plus" data-role="button" data-direction="reverse" data-transition="slide">Salvar</a>
+</div>
+
+<div data-role="content">
+
+    <div class="content-primary">
+
+        <form id="form" action="@{Projetos.save(projeto?.id)}" method="POST"> 
+
+            <ul data-role="listview" data-inset="true" data-divider-theme="${jqmtema}">
+                <li data-role="list-divider">Informações de Projetos</li>
+                <li>#{field 'projetoVO.nome'}<input type="text" name="${field.name}" placeholder="Nome" value="${projeto?.nome}"/>#{/field}</li>
+                <li>#{field 'projetoVO.descricao'}<textarea name="${field.name}" placeholder="Descricao">${projeto?.descricao}</textarea>#{/field}</li>
+
+
+                <li>#{field 'projetoVO.data_inicio'}<input name="${field.name}" placeholder="Data Inicio" value="${projeto?.data_inicio?.format('dd/MM/yyyy')}" type="date" data-role="datebox" theme="${jqmtema}" data-options='{"mode": "calbox", "disableManualInput": true, "useDialogForceTrue": false, "pickPageButtonTheme":"${jqmtema}","dateFormat": "dd/mm/YYYY","headerFormat": "dd/mm/YYYY"}'/>#{/field}</li>
+                <li>#{field 'projetoVO.data_fim'}<input name="${field.name}" placeholder="Data Fim" value="${projeto?.data_fim?.format('dd/MM/yyyy')}" type="date" data-role="datebox" theme="${jqmtema}" data-options='{"mode": "calbox", "disableManualInput": true, "useDialogForceTrue": false, "pickPageButtonTheme":"${jqmtema}","dateFormat": "dd/mm/YYYY","headerFormat": "dd/mm/YYYY"}'/>#{/field}</li>
+                
+                <li>
+                    #{field 'projetoVO.analistas.id'}
+                    <fieldset data-role="controlgroup">
+                        <legend>Analistas:</legend>
+                        #{list analistas, as:'a'}
+                        <input type="checkbox" name="${field.name}" id="${field.name}:${a.id}" class="custom" value="${a.id}"/>
+                        <label for="${field.name}:${a.id}">${a.toString()}</label>
+                        #{/list}                        
+
+                        #{if projeto?.analistas}
+                        <script>
+                            #{list projeto.analistas, as:'a'}
+                            $("input:checkbox[id='${field.name}:${a.id}']").attr('checked', true);
+                            #{/list}
+                        </script>
+                        #{/if}
+
+                    </fieldset>
+                    #{/field}
+
+                </li>
+
+            </ul>            
+
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a"><a href="@{Projetos.index}" data-theme="a" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a></div>
+                <div class="ui-block-b"><button type="submit" data-theme="${jqmtema}">Salvar</button></div>
+            </fieldset>
+
+        </form>
+
+    </div>
+
+</div>
+
+#{ifErrors}
+<div id="msginfo" class="ui-bar-e" data-role="footer" data-position="fixed">
+    <h3 style="float:left; margin-top:8px;">Verifique os erros</h3>
+    <div style="float:right; margin-top:4px;"><a href="#" onclick="document.getElementById('msginfo').style.display='none'" data-role="button" data-icon="delete" data-iconpos="notext">Button</a></div>
+    <p style="clear:both; font-weight: normal; font-size:85%; margin-bottom:8px;margin-left: 12px">
+        #{error 'projeto.nome'/}<br/>
+        #{error 'projeto.descricao'/}<br/>
+        #{error 'projeto.data_inicio'/}<br/>
+        #{error 'projeto.data_fim'/}<br/>
+        #{error 'projeto.analistas'/}<br/>
+    </p>
+</div>
+#{/ifErrors}
+

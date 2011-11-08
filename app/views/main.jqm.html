@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="@{'/public/javascripts/jquery.mobile-1.0rc2/jquery.mobile-1.0rc2.min.css'}" />
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
+        <script src="@{'/public/javascripts/jquery.mobile-1.0rc2/jquery.mobile-1.0rc2.min.js'}"></script>
+        
+        <link rel="stylesheet" href="@{'/public/javascripts/jquery.mobile.datebox/jquery.mobile.datebox.css'}" />
+        <script src="@{'/public/javascripts/jquery.mobile.datebox/jquery.mobile.datebox.js'}"></script>
+
+    </head>
+    <body>
+
+        #{doLayout /}
+        
+        #{if flash.error || error}
+
+        <div id="msginfo" class="ui-bar-e" data-role="footer" data-position="fixed">
+            <h3 style="float:left; margin-top:8px;">${error ?: flash.error}</h3>
+            <div style="float:right; margin-top:4px;"><a href="#" onclick="document.getElementById('msginfo').style.display='none'" data-role="button" data-icon="delete" data-iconpos="notext">Button</a></div>
+        </div>
+
+        #{/if}
+
+    </body>
+</html>

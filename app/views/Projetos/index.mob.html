@@ -1,0 +1,24 @@
+#{extends 'main.jqm.html' /}
+
+<div data-role="header" data-theme="${jqmtema}">
+    <a href="@{Application.index}" data-icon="home" data-role="button" data-transition="fade">Menu</a>
+    <h1>Projetos</h1>
+    <a href="@{Projetos.form}" data-icon="plus" data-role="button" data-transition="slideup">Novo</a>
+</div>
+
+<div data-role="content">
+    <div class="content-primary">	
+        <ul data-role="listview" data-filter="true">
+            #{list items:projetos, as:'p'}
+            <li>
+                <a href="@{Projetos.view(p.id)}" data-transition="slide">
+                    <h3>${p.nome}</h3>
+                    <p>${p.descricao}</p>
+                    <p><strong>Datas: </strong>${p.data_inicio?.format('dd/MM/yyyy')} até ${p.data_fim?.format('dd/MM/yyyy')}</p>
+                </a>
+            </li>
+            #{/list}
+
+        </ul>
+    </div>
+</div>
