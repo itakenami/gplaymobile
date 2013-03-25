@@ -1,9 +1,15 @@
 #{extends 'main.jqm.html' /}
 
-<div data-role="header" data-theme="${jqmtema}">
+<script>
+    $(document).ready(function(){
+        parent.done();
+    });
+</script>
 
+<div data-role="header" data-theme="${jqmtema}" data-position="fixed">
+	<a href="@{Application.excluir()}?&url=@{Analistas.delete(analista.id)}" data-rel="dialog" data-transition="slidedown" data-theme="${jqmtema}" data-icon="delete" data-role="button">Delete</a>
     <h1>${analista}</h1>
-    <a href="@{Analistas.form(analista.id)}" onclick="$.mobile.showPageLoadingMsg();"  data-theme="${jqmtema}" data-role="button" data-icon="search" rel="external" target="_parent">Editar</a>
+    <a href="@{Analistas.form(analista.id)}" onclick="$.mobile.showPageLoadingMsg();" data-theme="${jqmtema}" data-role="button" data-icon="search" data-transition="slide">Editar</a>	
 </div>   
 <div data-role="content">
     <div class="content-primary">
@@ -12,10 +18,6 @@
             <li>Nome: <span style="font-weight:normal">${analista.nome}</span></li>
             <li>Especialidade: <span style="font-weight:normal">${analista.especialidade}</span></li>
             <li>Cargo: <span style="font-weight:normal">${analista.cargo}</span></li>
-
         </ul>
-        <fieldset>
-            <a href="@{Application.excluir()}?&url=@{Analistas.delete(analista.id)}" data-rel="dialog" data-transition="slidedown" data-theme="${jqmtema}" data-role="button">Delete</a>
-        </fieldset>
     </div><!--/content-primary -->	
 </div>

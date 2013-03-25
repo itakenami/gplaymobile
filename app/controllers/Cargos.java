@@ -5,6 +5,7 @@ import models.Cargo;
 
 public class Cargos extends DefaultController {
 
+
     public static void index() {
         List<Cargo> cargos = Cargo.findAll();
         renderTemplate(getTemplateMultiView(), cargos);
@@ -17,11 +18,11 @@ public class Cargos extends DefaultController {
                 renderTemplate(getTemplateMultiView(), cargo);
             } else {
                 flash.error("Cargo não encontrado.");
-                index();
+				home("/cargos");
             }
         } else {
             flash.error("É necessário informar um cargo.");
-            index();
+			home("/cargos");
         }
     }
 
@@ -33,7 +34,7 @@ public class Cargos extends DefaultController {
         } catch (Exception ex) {
             flash.error("Erro ao apagar registro.");
         }
-        index();
+		home("/cargos");
     }
 
     public static void form(Long id) {
@@ -44,7 +45,7 @@ public class Cargos extends DefaultController {
                 renderTemplate(getTemplateMultiView(), cargo);
             } else {
                 flash.error("Registro não encontrado.");
-                index();
+				home("/cargos");
             }
         } else {
             renderTemplate(getTemplateMultiView());
@@ -63,7 +64,7 @@ public class Cargos extends DefaultController {
                 cargo.nome = cargoVO.nome;
             } else {
                 flash.error("Registro não encontrado.");
-                index();
+				home("/cargos");
             }
         }
         validation.valid(cargo);
@@ -72,6 +73,6 @@ public class Cargos extends DefaultController {
         }
         cargo.save();
         flash.success("Registro salvo com sucesso.");
-        index();
+		home("/cargos");
     }
 }

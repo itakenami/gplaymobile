@@ -1,10 +1,10 @@
 #{extends 'main.jqm.html' /}
 
-<div data-role="header" data-theme="${jqmtema}">
+<div data-role="header" data-theme="${jqmtema}" data-position="fixed">
 
-    <a href="@{Analistas.index}" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
+    <a href="@{Analistas.index}" onclick="$.mobile.showPageLoadingMsg();" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
     <h1>Analista</h1>
-    <a href="@{Analistas.form(analista.id)}"  data-transition="flip" data-theme="${jqmtema}" data-role="button" data-icon="search">Editar</a>
+    <a href="@{Analistas.form(analista.id)}" onclick="$.mobile.showPageLoadingMsg();" data-transition="flip" data-theme="${jqmtema}" data-role="button" data-icon="search">Editar</a>
 </div>   
 <div data-role="content">
     <div class="content-primary">
@@ -16,7 +16,7 @@
 
         </ul>
         <fieldset>
-            <a href="@{Application.excluir()}?&url=@{Analistas.delete(analista.id)}" data-rel="dialog" data-transition="slidedown" data-theme="${jqmtema}" data-role="button">Delete</a>
+            <a href="@{Application.excluir()}?&url=@{Analistas.delete(analista.id)}" onclick="$.mobile.showPageLoadingMsg();" data-rel="dialog" data-transition="slidedown" data-theme="${jqmtema}" data-role="button">Delete</a>
         </fieldset>
     </div><!--/content-primary -->	
 </div>

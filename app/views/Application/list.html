@@ -1,0 +1,37 @@
+#{extends 'main.jqm.html' /}
+
+<script>
+    $(document).ready(function(){
+        resize();
+    });
+    
+    $(window).resize(function() {
+        resize();
+    });
+    
+    function resize(){
+        $('#side').height($(window).height());
+        $('#side').width(300);
+        $('#main').height($(window).height());
+        $('#main').width($(window).width()-301);
+    } 
+	
+	function wait(){
+		$.mobile.showPageLoadingMsg();
+	}
+	
+	function done(){
+		$.mobile.hidePageLoadingMsg();
+	}
+	
+	function show(url){
+		$.mobile.showPageLoadingMsg();
+		$("#main").attr("src", url);
+	}
+</script>
+
+
+<iframe name="side" id="side" style="float:left;border-right: 1px solid black;" scrolling="auto" frameborder="0" frameborder="1" framespacing="0" src="${url}"></iframe>
+
+<iframe name="main" id="main" style="float:right" scrolling="auto" frameborder="0" frameborder="1" framespacing="0" src="@{Application.topo()}"></iframe>
+

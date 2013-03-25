@@ -1,17 +1,17 @@
 #{extends 'main.jqm.html' /}
 
-<div data-role="header" data-theme="${jqmtema}">
-    <a href="@{Application.index}" data-icon="home" data-role="button" data-transition="fade">Menu</a>
-    <h1>Analistas</h1>
-    <a href="@{Analistas.form}" data-icon="plus" data-role="button" data-transition="slideup">Novo</a>
-</div>
-
-<div data-role="content">
-    <div class="content-primary">	
-        <ul data-role="listview" data-filter="true">
-            #{list items:analistas, as:'a'}
-            <li><a href="@{Analistas.view(a.id)}" data-transition="slide">${a.nome}</a></li>
-            #{/list}
-        </ul>
+    <div data-role="header" data-theme="${jqmtema}" data-position="fixed">
+        <a href="@{Application.menu}" onclick="$.mobile.showPageLoadingMsg();" data-icon="home" data-role="button" data-direction="reverse" data-transition="slide">Menu</a>
+        <h1>Analistas</h1>
+        <a href="@{Analistas.form}" onclick="$.mobile.showPageLoadingMsg();" data-icon="plus" data-role="button" data-transition="slideup">Novo</a>
     </div>
-</div>
+
+    <div data-role="content">
+        <div class="content-primary">	
+            <ul data-role="listview" data-filter="true">
+                #{list items:analistas, as:'a'}
+                <li><a href="@{Analistas.view(a.id)}" onclick="$.mobile.showPageLoadingMsg();" data-transition="slide">${a.nome}</a></li>
+                #{/list}
+            </ul>
+        </div>
+    </div>

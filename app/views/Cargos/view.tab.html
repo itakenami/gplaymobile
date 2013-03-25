@@ -1,20 +1,22 @@
 #{extends 'main.jqm.html' /}
 
-<div data-role="header" data-theme="${jqmtema}">
+<script>
+    $(document).ready(function(){
+        parent.done();
+    });
+</script>
 
+<div data-role="header" data-theme="${jqmtema}" data-position="fixed">
+	<a href="@{Application.excluir()}?&url=@{Cargos.delete(cargo.id)}" data-rel="dialog" data-transition="slidedown" data-theme="${jqmtema}" data-icon="delete" data-role="button">Delete</a>
     <h1>${cargo}</h1>
-    <a href="@{Cargos.form(cargo.id)}" onclick="$.mobile.showPageLoadingMsg();" data-theme="${jqmtema}" data-role="button" data-icon="search" rel="external" target="_parent">Editar</a>
+    <a href="@{Cargos.form(cargo.id)}" onclick="$.mobile.showPageLoadingMsg();" data-theme="${jqmtema}" data-role="button" data-icon="search" data-transition="slide">Editar</a>
 </div>   
 <div data-role="content">
     <div class="content-primary">
         <ul data-role="listview" data-inset="true" data-divider-theme="${jqmtema}">
             <li data-role="list-divider">Informações de Cargo</li>
             <li>Nome: <span style="font-weight:normal">${cargo.nome}</span></li>
-
         </ul>
-        <fieldset>
-            <a href="@{Application.excluir()}?&url=@{Cargos.delete(cargo.id)}" data-rel="dialog" data-transition="slidedown" data-theme="${jqmtema}" data-role="button">Delete</a>
-        </fieldset>
     </div><!--/content-primary -->	
 </div>
 

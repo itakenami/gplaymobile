@@ -1,10 +1,19 @@
 #{extends 'main.jqm.html' /}
 
-<div data-role="header" data-theme="${jqmtema}">
+<script>
+    $(document).ready(function(){
+        parent.done();
+    });
+</script>
 
-    <a href="@{Analistas.index}" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
+
+<div data-role="header" data-theme="${jqmtema}" data-position="fixed">
+	
+	#{if analista?.id}
+	<a href="@{Analistas.view(analista?.id)}" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
+	#{/if}
     <h1>Analista</h1>
-    <a href="#" onclick="$('#form').submit()" data-icon="plus" data-role="button" data-direction="reverse" data-transition="slide">Salvar</a>
+    <a href="#" onclick="parent.wait();$('#form').submit()" data-icon="plus" data-role="button" data-direction="reverse" data-transition="slide" class="ui-btn-right">Salvar</a>
 
 </div>
 
@@ -12,7 +21,7 @@
 
     <div class="content-primary">
 
-        <form id="form" action="@{Analistas.save(analista?.id)}" method="POST"> 
+        <form id="form" action="@{Analistas.save(analista?.id)}" target="_parent" method="POST"> 
 
             <ul data-role="listview" data-inset="true" data-divider-theme="${jqmtema}">
                 <li data-role="list-divider">Informações de Analistas</li>
@@ -30,12 +39,6 @@
                     #{/field}
                 </li>
             </ul>            
-
-            <fieldset class="ui-grid-a">
-                <div class="ui-block-a"><a href="@{Analistas.index}" data-theme="a" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a></div>
-                <div class="ui-block-b"><button type="submit" data-theme="${jqmtema}">Salvar</button></div>
-            </fieldset>
-
         </form>
 
     </div>

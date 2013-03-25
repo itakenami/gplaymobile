@@ -1,12 +1,19 @@
 #{extends 'main.jqm.html' /}
 
+<script>
+    $(document).ready(function(){
+        parent.done();
+    });
+</script>
 
-<div data-role="header" data-theme="${jqmtema}">
-
-    <a href="@{Projetos.index}" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
+<div data-role="header" data-theme="${jqmtema}" data-position="fixed">
+	#{if projeto?.id}
+	<a href="@{Projetos.view(projeto?.id)}" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
+	#{/if}
     <h1>Projeto</h1>
-    <a href="#" onclick="$('#form').submit()" data-icon="plus" data-role="button" data-direction="reverse" data-transition="slide">Salvar</a>
+    <a href="#" onclick="parent.wait();$('#form').submit()" data-icon="plus" data-role="button" data-direction="reverse" data-transition="slide" class="ui-btn-right">Salvar</a>
 </div>
+
 
 <div data-role="content">
 
@@ -46,11 +53,6 @@
                 </li>
 
             </ul>            
-
-            <fieldset class="ui-grid-a">
-                <div class="ui-block-a"><a href="@{Projetos.index}" data-theme="a" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a></div>
-                <div class="ui-block-b"><button type="submit" data-theme="${jqmtema}">Salvar</button></div>
-            </fieldset>
 
         </form>
 

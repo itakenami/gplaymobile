@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                                       Application.index
+GET     /                                       Application.menu
 GET     /dialog                                 Application.dialog
 
 # Ignore favicon requests
@@ -11,7 +11,8 @@ GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
 # Rotas Padro 
-GET     /{controller}                           {controller}.index 
+GET     /{controller}	                        {controller}.index
+GET     /{controller}/index                		{controller}.index 
 GET     /{controller}/view/{id}                 {controller}.view 
 GET     /{controller}/form/{id}                 {controller}.form 
 GET     /{controller}/delete/{id}               {controller}.delete 

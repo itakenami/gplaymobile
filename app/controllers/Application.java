@@ -3,7 +3,7 @@ package controllers;
 public class Application extends DefaultController {
 
     //Menu da Aplicação
-    public static void index(){
+    public static void menu(){
         renderTemplate(getTemplateMultiView());
     }
     
@@ -13,6 +13,15 @@ public class Application extends DefaultController {
             msg = "Deseja realmente excluir?";
         }
         renderTemplate(getTemplateMultiView(),url,msg);
+    }
+	
+	//topo
+    public static void topo(){
+        render();
+    }
+	
+    public static void list(String url){
+        render(url);
     }
     
 }

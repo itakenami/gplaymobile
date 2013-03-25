@@ -1,10 +1,10 @@
 #{extends 'main.jqm.html' /}
 
-<div data-role="header" data-theme="${jqmtema}">
+<div data-role="header" data-theme="${jqmtema}" data-position="fixed">
 
-    <a href="@{Projetos.index}" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
+    <a href="@{Projetos.index}" onclick="$.mobile.showPageLoadingMsg();" data-icon="back" data-role="button" data-direction="reverse" data-transition="slide">Voltar</a>
     <h1>Projeto</h1>
-    <a href="@{Application.index}" data-icon="home" data-role="button" data-transition="fade">Menu</a>
+    <a href="#" onclick="$.mobile.showPageLoadingMsg();$('#form').submit()" data-icon="plus" data-role="button" data-direction="reverse" data-transition="slide" class="ui-btn-right">Salvar</a>
 
 </div>
 
@@ -12,7 +12,7 @@
 
     <div class="content-primary">
 
-        <form action="@{Projetos.save(projeto?.id)}" method="POST"> 
+        <form id="form" action="@{Projetos.save(projeto?.id)}" method="POST"> 
 
             <ul data-role="listview" data-inset="true" data-divider-theme="${jqmtema}">
                 <li data-role="list-divider">Informações de Projetos</li>
@@ -46,10 +46,6 @@
                 </li>
 
             </ul>            
-
-            <fieldset>
-                <button type="submit" data-theme="${jqmtema}">Salvar</button>
-            </fieldset>
 
         </form>
 

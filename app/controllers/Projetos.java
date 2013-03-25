@@ -5,8 +5,8 @@ import models.Projeto;
 import models.Analista;
 
 public class Projetos extends DefaultController {
-
-    public static void index() {
+	
+	public static void index() {
         List<Projeto> projetos = Projeto.findAll();
         renderTemplate(getTemplateMultiView(), projetos);
     }
@@ -18,11 +18,11 @@ public class Projetos extends DefaultController {
                 renderTemplate(getTemplateMultiView(), projeto);
             } else {
                 flash.error("Projeto não encontrado.");
-                index();
+                home("/projetos");
             }
         } else {
             flash.error("É necessário informar um projeto.");
-            index();
+            home("/projetos");
         }
     }
 
@@ -34,7 +34,7 @@ public class Projetos extends DefaultController {
         } catch (Exception ex) {
             flash.error("Erro ao apagar registro.");
         }
-        index();
+        home("/projetos");
     }
 
     public static void form(Long id) {
@@ -43,10 +43,10 @@ public class Projetos extends DefaultController {
         if (id != null) {
             Projeto projeto = Projeto.findById(id);
             if (projeto != null) {
-                render(projeto, analistas);
+                renderTemplate(getTemplateMultiView(), projeto, analistas);
             } else {
                 flash.error("Registro não encontrado.");
-                index();
+                home("/projetos");
             }
         } else {
             renderTemplate(getTemplateMultiView(), analistas);
@@ -69,7 +69,7 @@ public class Projetos extends DefaultController {
                 projeto.analistas = projetoVO.analistas;
             } else {
                 flash.error("Registro não encontrado.");
-                index();
+                home("/projetos");
             }
         }
         validation.valid(projeto);
@@ -79,6 +79,6 @@ public class Projetos extends DefaultController {
         }
         projeto.save();
         flash.success("Registro salvo com sucesso.");
-        index();
+        home("/projetos");
     }
 }

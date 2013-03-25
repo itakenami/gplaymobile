@@ -6,7 +6,11 @@ import play.mvc.Controller;
 import play.mvc.Http;
 
 public class DefaultController extends Controller {
-
+	
+	protected static final int DESKTOP = 0;
+	protected static final int TABLET = 1;
+	protected static final int MOBILE = 2;
+	
     @Before
     public static void setTema() {
         String tema = Cache.get(session.getId()+"-tema", String.class);
@@ -46,32 +50,62 @@ public class DefaultController extends Controller {
         Cache.set(session.getId()+"-tpl", type, "30mn");
         redirect("/");
     }
-
-    protected static String getTemplateMultiView() {
-
+	
+	
+	protected static void home(String url) {
+		if(getDevice()==TABLET){
+			Application.list(url);
+		}else{
+			redirect(url+"/index");
+		}
+	}
+	
+	
+	protected static int getDevice() {
+		/*
+			0 = DESKTOP
+			1 = TABLET
+			2 = MOBILE
+		*/
+		
         String tpl = Cache.get(session.getId()+"-tpl", String.class);
-        String prefix = "";
 
         if (tpl == null) {
+			
             Http.Header header = Http.Request.current().headers.get("user-agent");
             String mobile = header.toString().toUpperCase();
             
             if (mobile.contains("IPHONE")) {
-                prefix = ".mob";
+                return MOBILE;
             }
             if (mobile.contains("IPAD")) {
-                prefix = ".tab";
+                return TABLET;
             }
 
         }else{
             
             if (tpl.toUpperCase().equals("MOBILE")) {
-                prefix = ".mob";
+                return MOBILE;
             }
             if (tpl.toUpperCase().equals("TABLET")) {
-                prefix = ".tab";
+                return TABLET;
             }
         }
+		
+		return DESKTOP;	
+	}
+
+    protected static String getTemplateMultiView() {
+
+        String prefix = "";
+		
+		if(getDevice()==MOBILE){
+			prefix = ".mob";
+		}
+		
+		if(getDevice()==TABLET){
+			prefix = ".tab";
+		}
         
         //Teste para carregar o desktop
         if(prefix.equals("")){

@@ -1,10 +1,16 @@
 #{extends 'main.jqm.html' /}
 
-<div data-role="header" data-theme="${jqmtema}">
+<script>
+    $(document).ready(function(){
+        parent.done();
+    });
+</script>
 
-    <h1>${projeto}</h1>
-    <a href="@{Projetos.form(projeto.id)}" onclick="$.mobile.showPageLoadingMsg();" data-theme="${jqmtema}" data-role="button" data-icon="search" rel="external" target="_parent">Editar</a>
-</div>  
+<div data-role="header" data-theme="${jqmtema}" data-position="fixed">
+	<a href="@{Application.excluir()}?&url=@{Projetos.delete(projeto.id)}" data-rel="dialog" data-transition="slidedown" data-theme="${jqmtema}" data-icon="delete" data-role="button">Delete</a>
+    <h1>${cargo}</h1>
+    <a href="@{Projetos.form(projeto.id)}" onclick="$.mobile.showPageLoadingMsg();" data-theme="${jqmtema}" data-role="button" data-icon="search" data-transition="slide">Editar</a>
+</div> 
 
 <div data-role="content">
     <div class="content-primary">
@@ -34,9 +40,7 @@
 
             </ul>
         </div>
-        <fieldset>
-            <a href="@{Application.excluir()}?&url=@{Projetos.delete(projeto.id)}" data-rel="dialog" data-transition="slidedown" data-theme="${jqmtema}" data-role="button">Delete</a>
-        </fieldset>
+
     </div><!--/content-primary -->	
 </div>
 

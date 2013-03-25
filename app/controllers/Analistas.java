@@ -5,8 +5,8 @@ import models.Analista;
 import models.Cargo;
 
 public class Analistas extends DefaultController {
-
-    public static void index() {
+	
+	public static void index() {
         List<Analista> analistas = Analista.findAll();
         renderTemplate(getTemplateMultiView(), analistas);
     }
@@ -18,11 +18,11 @@ public class Analistas extends DefaultController {
                 renderTemplate(getTemplateMultiView(), analista);
             } else {
                 flash.error("Analista não encontrado.");
-                index();
+                home("/analistas");
             }
         } else {
             flash.error("É necessário informar um analista.");
-            index();
+            home("/analistas");
         }
     }
 
@@ -34,7 +34,7 @@ public class Analistas extends DefaultController {
         } catch (Exception ex) {
             flash.error("Erro ao apagar registro.");
         }
-        index();
+        home("/analistas");
     }
 
     public static void form(Long id) {
@@ -46,7 +46,7 @@ public class Analistas extends DefaultController {
                 renderTemplate(getTemplateMultiView(), analista, cargos);
             } else {
                 flash.error("Registro não encontrado.");
-                index();
+                home("/analistas");
             }
         } else {
             renderTemplate(getTemplateMultiView(), cargos);
@@ -67,7 +67,7 @@ public class Analistas extends DefaultController {
                 analista.cargo = analistaVO.cargo;
             } else {
                 flash.error("Registro não encontrado.");
-                index();
+                home("/analistas");
             }
         }
         validation.valid(analista);
@@ -77,6 +77,6 @@ public class Analistas extends DefaultController {
         }
         analista.save();
         flash.success("Registro salvo com sucesso.");
-        index();
+        home("/analistas");
     }
 }
